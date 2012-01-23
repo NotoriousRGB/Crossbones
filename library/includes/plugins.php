@@ -38,3 +38,72 @@ function xbones_wpsearch($form) {
     </form>';
     return $form;
 } // don't remove this bracket!
+
+
+function hex2RGB($hexStr, $returnAsString = false, $seperator = ',') {
+    $hexStr = preg_replace("/[^0-9A-Fa-f]/", '', $hexStr); // Gets a proper hex string
+    $rgbArray = array();
+    if (strlen($hexStr) == 6) { //If a proper hex code, convert using bitwise operation. No overhead... faster
+        $colorVal = hexdec($hexStr);
+        $rgbArray['red'] = 0xFF & ($colorVal >> 0x10);
+        $rgbArray['green'] = 0xFF & ($colorVal >> 0x8);
+        $rgbArray['blue'] = 0xFF & $colorVal;
+    } elseif (strlen($hexStr) == 3) { //if shorthand notation, need some string manipulations
+        $rgbArray['red'] = hexdec(str_repeat(substr($hexStr, 0, 1), 2));
+        $rgbArray['green'] = hexdec(str_repeat(substr($hexStr, 1, 1), 2));
+        $rgbArray['blue'] = hexdec(str_repeat(substr($hexStr, 2, 1), 2));
+    } else {
+        return false; //Invalid hex color code
+    }
+    return $returnAsString ? implode($seperator, $rgbArray) : $rgbArray; // returns the rgb string or the associative array
+}
+
+
+function colourBrightness($hex, $percent) {
+    // Work out if hash given
+    $hash = '';
+    if (stristr($hex,'#')) {
+        $hex = str_replace('#','',$hex);
+        $hash = '#';
+    }
+    /// HEX TO RGB
+    $rgb = array(hexdec(substr($hex,0,2)), hexdec(substr($hex,2,2)), hexdec(substr($hex,4,2)));
+    //// CALCULATE
+    for ($i=0; $i<3; $i++) {
+        // See if brighter or darker
+        if ($percent > 0) {
+            // Lighter
+            $rgb[$i] = round($rgb[$i] * $percent) + round(255 * (1-$percent));
+        } else {
+            // Darker
+            $positivePercent = $percent - ($percent*2);
+            $rgb[$i] = round($rgb[$i] * $positivePercent) + round(0 * (1-$positivePercent));
+        }
+        // In case rounding up causes us to go to 256
+        if ($rgb[$i] > 255) {
+            $rgb[$i] = 255;
+        }
+    }
+    //// RBG to Hex
+    $hex = '';
+    for($i=0; $i < 3; $i++) {
+        // Convert the decimal digit to hex
+        $hexDigit = dechex($rgb[$i]);
+        // Add a leading zero if necessary
+        if(strlen($hexDigit) == 1) {
+        $hexDigit = "0" . $hexDigit;
+        }
+        // Append to the hex string
+        $hex .= $hexDigit;
+    }
+    return $hash.$hex;
+}
+
+
+function getContrast($hexcolor, $tint){
+    $r = hexdec(substr($hexcolor,0,2));
+    $g = hexdec(substr($hexcolor,2,2));
+    $b = hexdec(substr($hexcolor,4,2));
+    $yiq = (($r*299)+($g*587)+($b*114))/1000;
+    return ($yiq >= 128) ? "-$tint" : "$tint";
+}

@@ -1,4 +1,4 @@
-<!doctype html>  
+<!DOCTYPE html>  
 
 <!--[if IEMobile 7 ]> <html <?php language_attributes(); ?>class="no-js iem7"> <![endif]-->
 <!--[if lt IE 7 ]> <html <?php language_attributes(); ?> class="no-js ie6 oldie"> <![endif]-->
@@ -41,40 +41,40 @@
 		<meta http-equiv="imagetoolbar" content="false" />
 		<!-- allow pinned sites -->
 		<meta name="application-name" content="<?php bloginfo('name'); ?>" />
-		
+		<!-- pingbacks -->
+		<link rel="pingback" href="<?php bloginfo('pingback_url'); ?>">
+
 		<!-- icons & favicons -->
 		<link rel="shortcut icon" href="<?php echo get_template_directory_uri(); ?>/favicon.ico">	
-		
-		<script>window.jQuery || document.write(unescape('%3Cscript src="<?php echo get_template_directory_uri(); ?>/library/js/libs/jquery-1.6.2.min.js"%3E%3C/script%3E'))</script>
-		
+				
+		<!-- google webfonts -->
+		<?php get_google_fonts(); ?>	
+
 		<!-- modernizr -->
 		<script src="<?php echo get_template_directory_uri(); ?>/library/js/modernizr.full.min.js"></script>
+						
+		<link rel="stylesheet" href="<?php echo get_template_directory_uri(); ?>/library/css/crossbones.css">
+		<link rel="stylesheet" href="<?php echo get_template_directory_uri(); ?>/library/css/flexslider.css">
 		
-  	<link rel="pingback" href="<?php bloginfo('pingback_url'); ?>">
-		
-		<!-- wordpress head functions -->
-		<?php wp_head(); ?>
+		<!-- fetch base theme // core.php -->
+		<?php get_base_theme(); ?>
+
+
+		<!-- wordpress head functions -->		
+		<?php wp_head(); ?>		
 		<!-- end of wordpress head -->
 		
-		<link rel="stylesheet" href="<?php bloginfo('stylesheet_url'); ?>">
-		<link rel="stylesheet" href="<?php echo get_template_directory_uri(); ?>/library/css/skeleton.css">	
-		<link rel="stylesheet" href="<?php echo get_template_directory_uri(); ?>/library/css/app.css">	
 		<!--[if lt IE 9]>
 		<link rel="stylesheet" href="<?php echo get_template_directory_uri(); ?>/library/css/ie.css">	
 		<![endif]-->
-		<link rel="stylesheet" href="<?php echo get_template_directory_uri(); ?>/custom-style.php" type="text/css" media="screen" />
+		
+
 
 	</head>
 	
 	<body <?php body_class(); ?>>
 	
-		<div id="container">
-			
-			<header role="banner">
-					
-					<nav role="navigation">
-					</nav>
-				
-				</div> <!-- end #inner-header -->
-			
-			</header> <!-- end header -->
+<div class="container">
+		
+<?php require_once ( XBONES_FILEPATH . '/library/modules/navigation.php'); ?>
+

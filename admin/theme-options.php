@@ -1,47 +1,32 @@
 <?php
 
-add_action('init','xbones_options');
+add_action('init','of_options');
 
-if (!function_exists('xbones_options')) {
-function xbones_options(){
+if (!function_exists('of_options')) {
+function of_options(){
 	
-// VARIABLES
-$themename = get_theme_data(STYLESHEETPATH . '/style.css');
-$themename = $themename['Name'];
-$shortname = "xbones";
-
-// Populate option in array for use in theme
-global $xbones_options;
-$xbones_options = get_option('xbones_options');
-
-$GLOBALS['template_path'] = XBONES_DIRECTORY;
-
 //Access the WordPress Categories via an Array
-$xbones_categories = array();  
-$xbones_categories_obj = get_categories('hide_empty=0');
-foreach ($xbones_categories_obj as $xbones_cat) {
-    $xbones_categories[$xbones_cat->cat_ID] = $xbones_cat->cat_name;}
-$categories_tmp = array_unshift($xbones_categories, "Select a category:");    
+$of_categories = array();  
+$of_categories_obj = get_categories('hide_empty=0');
+foreach ($of_categories_obj as $of_cat) {
+    $of_categories[$of_cat->cat_ID] = $of_cat->cat_name;}
+$categories_tmp = array_unshift($of_categories, "Select a category:");    
        
 //Access the WordPress Pages via an Array
-$xbones_pages = array();
-$xbones_pages_obj = get_pages('sort_column=post_parent,menu_order');    
-foreach ($xbones_pages_obj as $xbones_page) {
-    $xbones_pages[$xbones_page->ID] = $xbones_page->post_name; }
-$xbones_pages_tmp = array_unshift($xbones_pages, "Select a page:");       
-
-// Image Alignment radio box
-$options_thumb_align = array("alignleft" => "Left","alignright" => "Right","aligncenter" => "Center"); 
-
-// Image Links to Options
-$options_image_link_to = array("image" => "The Image","post" => "The Post"); 
+$of_pages = array();
+$of_pages_obj = get_pages('sort_column=post_parent,menu_order');    
+foreach ($of_pages_obj as $of_page) {
+    $of_pages[$of_page->ID] = $of_page->post_name; }
+$of_pages_tmp = array_unshift($of_pages, "Select a page:");       
 
 //Testing 
-$options_select = array("one","two","three","four","five"); 
-$options_radio = array("one" => "One","two" => "Two","three" => "Three","four" => "Four","five" => "Five"); 
+$of_options_select = array("one","two","three","four","five"); 
+$of_options_radio = array("one" => "One","two" => "Two","three" => "Three","four" => "Four","five" => "Five");
+
+
 
 //Stylesheets Reader
-$alt_stylesheet_path = XBONES_FILEPATH;
+$alt_stylesheet_path = LAYOUT_PATH;
 $alt_stylesheets = array();
 
 if ( is_dir($alt_stylesheet_path) ) {
@@ -54,370 +39,386 @@ if ( is_dir($alt_stylesheet_path) ) {
     }
 }
 
+//Background Images Reader
+$bg_images_path = STYLESHEETPATH. '/images/bg/'; // change this to where you store your bg images
+$bg_images_url = get_bloginfo('template_url').'/images/bg/'; // change this to where you store your bg images
+$bg_images = array();
+
+if ( is_dir($bg_images_path) ) {
+    if ($bg_images_dir = opendir($bg_images_path) ) { 
+        while ( ($bg_images_file = readdir($bg_images_dir)) !== false ) {
+            if(stristr($bg_images_file, ".png") !== false || stristr($bg_images_file, ".jpg") !== false) {
+                $bg_images[] = $bg_images_url . $bg_images_file;
+            }
+        }    
+    }
+}
+
+/*-----------------------------------------------------------------------------------*/
+/* TO DO: Add options/functions that use these */
+/*-----------------------------------------------------------------------------------*/
+
 //More Options
 $uploads_arr = wp_upload_dir();
 $all_uploads_path = $uploads_arr['path'];
-$all_uploads = get_option('xbones_uploads');
+$all_uploads = get_option('of_uploads');
 $other_entries = array("Select a number:","1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19");
 $body_repeat = array("no-repeat","repeat-x","repeat-y","repeat");
 $body_pos = array("top left","top center","top right","center left","center center","center right","bottom left","bottom center","bottom right");
-$base_style = array("white", "black", "grey");
+
+// Image Alignment radio box
+$of_options_thumb_align = array("alignleft" => "Left","alignright" => "Right","aligncenter" => "Center"); 
+
+// Image Links to Options
+$of_options_image_link_to = array("image" => "The Image","post" => "The Post"); 
+
+// Homepage Modules
+$of_options_homepage_blocks = array( 
+	"disabled" => array (
+		"placebo" 		=> "placebo", //REQUIRED!
+		"slideshow"		=> "Slideshow",
+		"tagline"		=> "Tagline",
+		"portfolio"	=> "Portfolio",
+		"articles" => "Articles",
+		"widgets"	=> "Widgets",
+		"blog" => "Blog"
+	),
+	"enabled" => array (
+		"placebo" => "placebo", //REQUIRED!
+	),
+);
+// Custom Arrays
+$base_style = array("Theme", "Black", "Grey");
+$home_modules = array("none", "slider", "portfolio", "articles", "tagline", "widgets", "content");
+$border_types = array("none", "solid", "dotted", "dashed", "double", "groove", "ridge", "inset", "outset");
+$fonts = array("Gentium", "Armata", "Open Sans", "Droid Sans", "Droid Serif", "Droid Sans Mono", "Oswald", "PT Sans", "Yanone Kaffeesatz", "Lobster", "Ubuntu", "Arvo", "Lora", "Cabin", "Josefin Sans", "Nobile", "Goudy Bookletter 1911", "Allerta", "Crimson Text", "Molengo", "Lekton", "Corbin", "Raleway", "Vollkorn", "Abril Fatface", "Hammersmith One", "Lato:900", "Playfair Display", "ChunkFive", "Bevan", "Comfortaa", "Concert One", "Quattrocento Sans", "Vast Shadow", "Helvetica*", "Garamond*", "Palatino*", "Baskerville*", "Futura*", "Gill Sans*", "Trebuchet MS*", "Verdana*", "Lucida Grande*", "Arial*");
+
+sort($fonts); 
+
+
+/*-----------------------------------------------------------------------------------*/
+/* The Options Array */
+/*-----------------------------------------------------------------------------------*/
 
 // Set the Options Array
-$options = array();
+global $of_options;
+$of_options = array();
 
-
-
-
-
-
-$options[] = array( "name" => __('New Settings!!!','framework'),
+$of_options[] = array( "name" => "Custom Settings",
                     "type" => "heading");
-                    
-$options[] = array( "name" => __('Base Style','framework'),
-					"desc" => __('Select a base stylesheet.','framework'),
-					"id" => $shortname."_portfolio_page",
-					"std" => "Select a page:",
+
+$of_options[] = array( "name" =>  "Primary Color",
+					"desc" => "Pick a background color for the theme (default: #fff).",
+					"id" => "xbones_primary_colour",
+					"std" => "",
+					"type" => "color");
+
+$of_options[] = array( "name" =>  "Secondary Color",
+					"desc" => "Pick a background color for the theme (default: #fff).",
+					"id" => "xbones_secondary_colour",
+					"std" => "",
+					"type" => "color");
+
+$of_options[] = array( "name" =>  "Highlight Color",
+					"desc" => "Pick a background color for the theme (default: #fff).",
+					"id" => "xbones_highlight_colour",
+					"std" => "",
+					"type" => "color");
+
+$of_options[] = array( "name" =>  "Background Color",
+					"desc" => "Pick a background color for the theme (default: #fff).",
+					"id" => "xbones_background_colour",
+					"std" => "",
+					"type" => "color");
+
+$of_options[] = array( "name" => "Background Texture",
+					"desc" => "Upload images using native media uploader. This is a min version, meaning it has no url to copy paste. Perfect for logo.",
+					"id" => "xbones_background_pattern",
+					"std" => "",
+					"mod" => "min",
+					"type" => "media");
+
+
+
+
+$of_options[] = array( "name" => "Theme Stylesheet",
+					"desc" => "Select your themes alternative color scheme.",
+					"id" => "xbones_base_style",
+					"std" => "Theme",
 					"type" => "select",
-					"options" => $base_style);
+					"options" => $base_style); 
 
-
-
-
-
-
-
-$options[] = array( "name" => __('General Settings','framework'),
-                    "type" => "heading");
-                    
-$options[] = array( "name" => __('Enable Plain Text Logo','framework'),
-					"desc" => __('Check this to enable a plain text logo rather than an image.','framework'),
-					"id" => $shortname."_plain_logo",
-					"std" => "false",
-					"type" => "checkbox");
-
-$options[] = array( "name" => __('Custom Logo','framework'),
-					"desc" => __('Upload a logo for your theme, or specify the image address of your online logo. (http://example.com/logo.png)','framework'),
-					"id" => $shortname."_logo",
+$of_options[] = array( "name" => "Heading Font",
+					"desc" => "Select your themes alternative color scheme.",
+					"id" => "xbones_heading_font",
 					"std" => "",
-					"type" => "upload");
-					
-$options[] = array( "name" => __('Custom Favicon','framework'),
-					"desc" => __('Upload a 16px x 16px Png/Gif image that will represent your website\'s favicon.','framework'),
-					"id" => $shortname."_custom_favicon",
+					"type" => "select",
+					"options" => $fonts); 
+
+$of_options[] = array( "name" => "Body Font",
+					"desc" => "Select your themes alternative color scheme.",
+					"id" => "xbones_body_font",
 					"std" => "",
-					"type" => "upload");
-					
-$options[] = array( "name" => __('Contact Form Email Address','framework'),
-					"desc" => __('Enter the email address where you\'d like to receive emails from the contact form, or leave blank to use admin email.','framework'),
-					"id" => $shortname."_email",
-					"std" => "",
-					"type" => "text");
-					
-$options[] = array( "name" => __('FeedBurner URL','framework'),
-					"desc" => __('Enter your full FeedBurner URL (or any other preferred feed URL) if you wish to use FeedBurner over the standard WordPress Feed e.g. http://feeds.feedburner.com/yoururlhere','framework'),
-					"id" => $shortname."_feedburner",
-					"std" => "",
-					"type" => "text");
-					
-$options[] = array( "name" => __('Footer Text','framework'),
-					"desc" => __('Enter the text you would like to display in the footer of your site.','framework'),
-					"id" => $shortname."_footer_text",
-					"std" => "You can find me bumming around <a href=\"http://www.twitter.com/ormanclark\">Twitter</a>, <a href=\"http://dribbble.com/ormanclark\">Dribbble</a> &amp; <a href=\"http://forrst.com/people/ormanclark/posts\">Forrst</a>",
-					"type" => "textarea");
+					"type" => "select",
+					"options" => $fonts); 
 
-$options[] = array( "name" => __('Tracking Code','framework'),
-					"desc" => __('Paste your Google Analytics (or other) tracking code here. It will be inserted before the closing body tag of your theme.','framework'),
-					"id" => $shortname."_google_analytics",
-					"std" => "",
-					"type" => "textarea");                                                    
+$of_options[] = array( "name" => "Homepage Layout Manager",
+					"desc" => "Organize how you want the layout to appear on the homepage",
+					"id" => "homepage_blocks",
+					"std" => $of_options_homepage_blocks,
+					"type" => "sorter");
+
+$of_options[] = array( "name" => "Tagline",
+					"desc" => "Paste your Google Analytics (or other) tracking code here. This will be added into the footer template of your theme.",
+					"id" => "xbones_tagline",
+					"std" => "Hey There!",
+					"type" => "textarea");  
 
 
 
 
-$options[] = array( "name" => __('Styling Options','framework'),
+
+
+
+
+/*
+
+$of_options[] = array( "name" => "Home Settings",
 					"type" => "heading");
-
-$options[] = array( "name" => __('Primary link Colour (default #88BBC8)','framework'),
-					"desc" => __('Your primary link colour.','framework'),
-					"id" => $shortname."_primary_colour",
-					"std" => "#88BBC8",
-					"type" => "color"); 
 					
-$options[] = array( "name" => __('Primary link hover Colour (default #f26535)','framework'),
-					"desc" => __('Your primary link Hover colour.','framework'),
-					"id" => $shortname."_primary_hover_colour",
-					"std" => "#f26535",
-					"type" => "color");				
-
-$url = XBONES_DIRECTORY . '/admin/images/';
-$options[] = array( "name" => __('Main Layout','framework'),
-					"desc" => __('Select main content and sidebar alignment.','framework'),
-					"id" => $shortname."_layout",
-					"std" => "layout-2cr",
-					"type" => "images",
-					"options" => array(
-						'layout-2cr' => $url . '2cr.png',
-						'layout-2cl' => $url . '2cl.png')
+$of_options[] = array( "name" => "Hello there!",
+					"desc" => "",
+					"id" => "introduction",
+					"std" => "<h3 style=\"margin: 0 0 10px;\">Welcome to the Options Framework demo.</h3>
+					This is a slightly modified version of the original options framework by Devin Price with a couple of aesthetical improvements on the interface and some cool additional features. If you want to learn how to setup these options or just need general help on using it feel free to visit my blog at <a href=\"http://aquagraphite.com/2011/09/29/slightly-modded-options-framework/\">AquaGraphite.com</a>",
+					"icon" => true,
+					"type" => "info");
+					
+$of_options[] = array( "name" => "Media Uploader",
+					"desc" => "Upload images using the native media uploader, or define the URL directly",
+					"id" => "media_upload",
+					"std" => "",
+					"type" => "media");
+					
+$of_options[] = array( "name" => "Media Uploader Min",
+					"desc" => "Upload images using native media uploader. This is a min version, meaning it has no url to copy paste. Perfect for logo.",
+					"id" => "media_upload_2",
+					"std" => "",
+					"mod" => "min",
+					"type" => "media");
+					
+$of_options[] = array( "name" => "Homepage Layout Manager",
+					"desc" => "Organize how you want the layout to appear on the homepage",
+					"id" => "homepage_blocks",
+					"std" => $of_options_homepage_blocks,
+					"type" => "sorter");
+					
+$of_options[] = array( "name" => "Slider Options",
+					"desc" => "Unlimited slider with drag and drop sortings.",
+					"id" => "pingu_slider",
+					"std" => "",
+					"type" => "slider");
+					
+$of_options[] = array( "name" => "Background Images",
+					"desc" => "Select a background pattern.",
+					"id" => "custom_bg",
+					"std" => $bg_images_url."bg0.png",
+					"type" => "tiles",
+					"options" => $bg_images,
 					);
 					
-$options[] = array( "name" => __('Custom CSS','framework'),
-                    "desc" => __('Quickly add some CSS to your theme by adding it to this block.','framework'),
-                    "id" => $shortname."_custom_css",
+$of_options[] = array( "name" => "Typography",
+					"desc" => "Typography option with each property can be called individually.",
+					"id" => "custom_type",
+					"std" => array('size' => '12px','style' => 'bold italic'),
+					"type" => "typography");
+
+$of_options[] = array( "name" => "General Settings",
+                    "type" => "heading");
+					
+$url =  ADMIN_DIR . 'images/';
+$of_options[] = array( "name" => "Main Layout",
+					"desc" => "Select main content and sidebar alignment. Choose between 1, 2 or 3 column layout.",
+					"id" => "layout",
+					"std" => "2c-l-fixed.css",
+					"type" => "images",
+					"options" => array(
+						'1col-fixed.css' => $url . '1col.png',
+						'2c-r-fixed.css' => $url . '2cr.png',
+						'2c-l-fixed.css' => $url . '2cl.png',
+						'3c-fixed.css' => $url . '3cm.png',
+						'3c-r-fixed.css' => $url . '3cr.png')
+					);
+$of_options[] = array( "name" => "Custom Favicon",
+					"desc" => "Upload a 16px x 16px Png/Gif image that will represent your website's favicon.",
+					"id" => "custom_favicon",
+					"std" => "",
+					"type" => "upload"); 
+                                               
+$of_options[] = array( "name" => "Tracking Code",
+					"desc" => "Paste your Google Analytics (or other) tracking code here. This will be added into the footer template of your theme.",
+					"id" => "google_analytics",
+					"std" => "",
+					"type" => "textarea");        
+
+
+$of_options[] = array( "name" => "Footer Text",
+                    "desc" => "You can use the following shortcodes in your footer text: [wp-link] [theme-link] [loginout-link] [blog-title] [blog-link] [the-year]",
+                    "id" => "footer_text",
+                    "std" => "Powered by [wp-link]. Built on the [theme-link].",
+                    "type" => "textarea");                                                          
+    
+$of_options[] = array( "name" => "Styling Options",
+					"type" => "heading");
+					
+$of_options[] = array( "name" => "Theme Stylesheet",
+					"desc" => "Select your themes alternative color scheme.",
+					"id" => "alt_stylesheet",
+					"std" => "default.css",
+					"type" => "select",
+					"options" => $alt_stylesheets); 
+					
+$of_options[] = array( "name" =>  "Body Background Color",
+					"desc" => "Pick a background color for the theme (default: #fff).",
+					"id" => "body_background",
+					"std" => "",
+					"type" => "color");
+					
+$of_options[] = array( "name" =>  "Header Background Color",
+					"desc" => "Pick a background color for the header (default: #fff).",
+					"id" => "header_background",
+					"std" => "",
+					"type" => "color");   
+
+$of_options[] = array( "name" =>  "Footer Background Color",
+					"desc" => "Pick a background color for the footer (default: #fff).",
+					"id" => "footer_background",
+					"std" => "",
+					"type" => "color");
+					
+$of_options[] = array( "name" => "Body Font",
+					"desc" => "Specify the body font properties",
+					"id" => "body_font",
+					"std" => array('size' => '12px','face' => 'arial','style' => 'normal','color' => '#000000'),
+					"type" => "typography");  
+					
+$of_options[] = array( "name" => "Custom CSS",
+                    "desc" => "Quickly add some CSS to your theme by adding it to this block.",
+                    "id" => "custom_css",
                     "std" => "",
                     "type" => "textarea");
 
+$of_options[] = array( "name" => "Example Options",
+					"type" => "heading"); 	   
 
-
-
-$options[] = array( "name" => __('Homepage Settings','framework'),
-                    "type" => "heading");
+$of_options[] = array( "name" => "Typography",
+					"desc" => "This is a typographic specific option.",
+					"id" => "typography",
+					"std" => array('size' => '12px','face' => 'verdana','style' => 'bold italic','color' => '#123456'),
+					"type" => "typography");  
 					
-$options[] = array( "name" => __('Display Welcome Message','framework'),
-					"desc" => __('Check this to enable the welcome message','framework'),
-					"id" => $shortname."_enable_welcome_message",
-					"std" => "false",
-					"type" => "checkbox");
+$of_options[] = array( "name" => "Border",
+					"desc" => "This is a border specific option.",
+					"id" => "border",
+					"std" => array('width' => '2','style' => 'dotted','color' => '#444444'),
+					"type" => "border");      
 					
+$of_options[] = array( "name" => "Colorpicker",
+					"desc" => "No color selected.",
+					"id" => "example_colorpicker",
+					"std" => "",
+					"type" => "color"); 
 					
-$options[] = array( "name" => __('Home Welcome Message','framework'),
-					"desc" => __('The large welcome message that appears above the slider.','framework'),
-					"id" => $shortname."_home_message",
-					"std" => "Hey there! I'm John Doe and I make awesome WordPress themes. This can be used to describe what you do, how you do it, and who you do it for.",
-					"type" => "textarea");					
-	
-$options[] = array( "name" => __('Display Recent Portfolio','framework'),
-					"desc" => __('Check this to enable the recent portfolio section','framework'),
-					"id" => $shortname."_recent_portfolio",
-					"std" => "false",
-					"type" => "checkbox");
+$of_options[] = array( "name" => "Colorpicker (default #2098a8)",
+					"desc" => "Color selected.",
+					"id" => "example_colorpicker_2",
+					"std" => "#2098a8",
+					"type" => "color");          
+                  
+$of_options[] = array( "name" => "Upload",
+					"desc" => "An image uploader without text input.",
+					"id" => "uploader",
+					"std" => "",
+					"type" => "upload");  
 					
-$options[] = array( "name" => __('Portfolio Posts','framework'),
-					"desc" => __('Enter the amount of portfolio posts you would like to show on the homepage.','framework'),
-					"id" => $shortname."_portfolio_number",
-					"std" => "3",
-					"type" => "text");
-					
-$options[] = array( "name" => __('Portfolio Title','framework'),
-					"desc" => __('Enter the title of the portfolio area.','framework'),
-					"id" => $shortname."_portfolio_title",
-					"std" => "Recent Projects",
-					"type" => "text");
-					
-$options[] = array( "name" => __('Portfolio Description','framework'),
-					"desc" => __('Enter the description of the portfolio area.','framework'),
-					"id" => $shortname."_portfolio_description",
-					"std" => "Donec sed odio dui. Nulla vitae elit libero, a pharetra augue. Nullam id...",
-					"type" => "textarea");
-					
-$options[] = array( "name" => __('Portfolio Page','framework'),
-					"desc" => __('Select the page used as a portfolio, this will be used for the portfolio link.','framework'),
-					"id" => $shortname."_portfolio_page",
-					"std" => "Select a page:",
+$of_options[] = array( "name" => "Upload Min",
+					"desc" => "An image uploader with text input.",
+					"id" => "uploader2",
+					"std" => "",
+					"mod" => "min",
+					"type" => "upload");     
+                                
+$of_options[] = array( "name" => "Input Text",
+					"desc" => "A text input field.",
+					"id" => "test_text",
+					"std" => "Default Value",
+					"type" => "text"); 
+                                  
+$of_options[] = array( "name" => "Input Checkbox (false)",
+					"desc" => "Example checkbox with false selected.",
+					"id" => "example_checkbox_false",
+					"std" => false,
+					"type" => "checkbox");    
+                                        
+$of_options[] = array( "name" => "Input Checkbox (true)",
+					"desc" => "Example checkbox with true selected.",
+					"id" => "example_checkbox_true",
+					"std" => true,
+					"type" => "checkbox"); 
+                                                                           
+$of_options[] = array( "name" => "Normal Select",
+					"desc" => "Normal Select Box.",
+					"id" => "example_select",
+					"std" => "three",
 					"type" => "select",
-					"options" => $xbones_pages);
+					"options" => $of_options_select);                                                          
+
+$of_options[] = array( "name" => "Mini Select",
+					"desc" => "A mini select box.",
+					"id" => "example_select_2",
+					"std" => "two",
+					"type" => "select2",
+					"class" => "mini", //mini, tiny, small
+					"options" => $of_options_radio);    
+
+$of_options[] = array( "name" => "Input Radio (one)",
+					"desc" => "Radio select with default of 'one'.",
+					"id" => "example_radio",
+					"std" => "one",
+					"type" => "radio",
+					"options" => $of_options_radio);
 					
-$options[] = array( "name" => __('Display Recent Posts','framework'),
-					"desc" => __('Check this to enable the recent post section','framework'),
-					"id" => $shortname."_recent_posts",
-					"std" => "false",
-					"type" => "checkbox");
-					
-$options[] = array( "name" => __('Recent Posts','framework'),
-					"desc" => __('Enter the amount of recent posts you would like to show on the homepage.','framework'),
-					"id" => $shortname."_recent_number",
-					"std" => "3",
-					"type" => "text");
-					
-$options[] = array( "name" => __('Recent Title','framework'),
-					"desc" => __('Enter the title of the portfolio area.','framework'),
-					"id" => $shortname."_recent_title",
-					"std" => "Recently Published",
-					"type" => "text");
-					
-$options[] = array( "name" => __('Recent Description','framework'),
-					"desc" => __('Enter the description of the recent posts area.','framework'),
-					"id" => $shortname."_recent_description",
-					"std" => "Donec sed odio dui. Nulla vitae elit libero, a pharetra augue. Nullam id...",
-					"type" => "textarea");
-					
-$options[] = array( "name" => __('Blog Page','framework'),
-					"desc" => __('Select the page used as a blog, this will be used for the blog link.','framework'),
-					"id" => $shortname."_blog_page",
-					"std" => "Select a page:",
+$url =  ADMIN_DIR . 'images/';
+$of_options[] = array( "name" => "Image Select",
+					"desc" => "Use radio buttons as images.",
+					"id" => "images",
+					"std" => "warning.css",
+					"type" => "images",
+					"options" => array(
+						'warning.css' => $url . 'warning.png',
+						'accept.css' => $url . 'accept.png',
+						'wrench.css' => $url . 'wrench.png'));
+                                        
+$of_options[] = array( "name" => "Textarea",
+					"desc" => "Textarea description.",
+					"id" => "example_textarea",
+					"std" => "Default Text",
+					"type" => "textarea"); 
+                                      
+$of_options[] = array( "name" => "Multicheck",
+					"desc" => "Multicheck description.",
+					"id" => "example_multicheck",
+					"std" => array("three","two"),
+				  	"type" => "multicheck",
+					"options" => $of_options_radio);
+                                      
+$of_options[] = array( "name" => "Select a Category",
+					"desc" => "A list of all the categories being used on the site.",
+					"id" => "example_category",
+					"std" => "Select a category:",
 					"type" => "select",
-					"options" => $xbones_pages);
-					
-					
-
-
-$options[] = array( "name" => __('Slider Options','framework'),
-					"type" => "heading");
-
-$options[] = array( "name" => __('Enable Slider','framework'),
-					"desc" => __('Check this to enable the slider on the homepage.','framework'),
-					"id" => $shortname."_enable_slider",
-					"std" => "false",
-					"type" => "checkbox");
-					
-$options[] = array( "name" => __('Slider Autoplay','framework'),
-					"desc" => __('Choose the time in milliseconds between slider transitions where 1000 = 1second. Leave blank to disable.','framework'),
-					"id" => $shortname."_slider_autoplay",
-					"std" => "5000",
-					"type" => "text");	
-					
-$options[] = array( "name" => __('Slider Image 1','framework'),
-					"desc" => __('Image must be 940px x 350px','framework'),
-					"id" => $shortname."_slider_1",
-					"std" => "",
-					"type" => "upload_min");
-					
-$options[] = array( "name" => __('Slider Image 1 URL','framework'),
-					"desc" => __('Choose a link URL for this image.','framework'),
-					"id" => $shortname."_slider_url_1",
-					"std" => "",
-					"type" => "text");
-					
-$options[] = array( "name" => __('Slider Image 2','framework'),
-					"desc" => __('Image must be 940px x 350px','framework'),
-					"id" => $shortname."_slider_2",
-					"std" => "",
-					"type" => "upload_min");
-					
-$options[] = array( "name" => __('Slider Image 2 URL','framework'),
-					"desc" => __('Choose a link URL for this image.','framework'),
-					"id" => $shortname."_slider_url_2",
-					"std" => "",
-					"type" => "text");
-					
-$options[] = array( "name" => __('Slider Image 3','framework'),
-					"desc" => __('Image must be 940px x 350px','framework'),
-					"id" => $shortname."_slider_3",
-					"std" => "",
-					"type" => "upload_min");
-					
-$options[] = array( "name" => __('Slider Image 3 URL','framework'),
-					"desc" => __('Choose a link URL for this image.','framework'),
-					"id" => $shortname."_slider_url_3",
-					"std" => "",
-					"type" => "text");
-					
-$options[] = array( "name" => __('Slider Image 4','framework'),
-					"desc" => __('Image must be 940px x 350px','framework'),
-					"id" => $shortname."_slider_4",
-					"std" => "",
-					"type" => "upload_min");
-					
-$options[] = array( "name" => __('Slider Image 4 URL','framework'),
-					"desc" => __('Choose a link URL for this image.','framework'),
-					"id" => $shortname."_slider_url_4",
-					"std" => "",
-					"type" => "text");
-					
-$options[] = array( "name" => __('Slider Image 5','framework'),
-					"desc" => __('Image must be 940px x 350px','framework'),
-					"id" => $shortname."_slider_5",
-					"std" => "",
-					"type" => "upload_min");
-					
-$options[] = array( "name" => __('Slider Image 5 URL','framework'),
-					"desc" => __('Choose a link URL for this image.','framework'),
-					"id" => $shortname."_slider_url_5",
-					"std" => "",
-					"type" => "text");
-
-
-
-                    
-
-
-$options[] = array( "name" => __('Menu Options','framework'),
-					"type" => "heading");
-					
-$options[] = array( "name" => "",
-					"message" => __('The navigation settings below will be overwritten if you use WordPress 3.0 custom menus.','framework'),
-					"type" => "note");
-                    
-$options[] = array( "name" => __('Exclude From Primary Navigation','framework'),
-					"desc" => __('Enter a comma-separated list of any Page IDs you wish to exclude from the navigation (e.g. 1,5,6,)','framework'),
-					"id" => $shortname."_primary_nav_exclude",
-					"std" => "",
-					"type" => "text");
-					
-$options[] = array( "name" => __('Menu Order','framework'),
-					"desc" => __('Select the view order you wish to set for the main navigation.','framework'),
-					"id" => $shortname."_primary_nav_order",
-					"std" => "ID",
-					"type" => "select",
-					"options" => array('post_title', 'menu_order', 'ID'));
-					
-					
-					
-					
-$options[] = array( "name" => __('Posts &amp; Portfolio','framework'),
-					"type" => "heading");
-
-$options[] = array( "name" => __('Enable Portfolio Slider','framework'),
-					"desc" => __('Check this to enable the portfolio slider. If disabled, the images will appear underneath each other.','framework'),
-					"id" => $shortname."_portfolio_enable_slider",
-					"std" => "false",
-					"type" => "checkbox");
-									
-$options[] = array( "name" => __('Portfolio Slider Autoplay','framework'),
-					"desc" => __('Choose the time in milliseconds between slider transitions where 1000 = 1second. Leave blank to disable.','framework'),
-					"id" => $shortname."_portfolio_slider_autoplay",
-					"std" => "5000",
-					"type" => "text");
-					
-					// Added v1.1
-$options[] = array( "name" => __('Enable Lightbox','framework'),
-					"desc" => __('Check this to enable the lightbox effect. If disabled, the images will link to their respective portfolio items.','framework'),
-					"id" => $shortname."_lightbox",
-					"std" => "true",
-					"type" => "checkbox");
-					// ------------------------
-					
-$options[] = array( "name" => __('Related Portfolio Title','framework'),
-					"desc" => __('This is the title for the related portfolio area.','framework'),
-					"id" => $shortname."_related_portfolio_title",
-					"std" => "Similar Projects",
-					"type" => "text");
-					
-$options[] = array( "name" => __('Related Portfolio Description','framework'),
-					"desc" => __('This is the description for the related portfolio area.','framework'),
-					"id" => $shortname."_related_portfolio_description",
-					"std" => "Donec sed odio dui. Nulla vitae elit librero, a pharetra augue. Nullam id...",
-					"type" => "textarea");
-					
-$options[] = array( "name" => __('Related Portfolio Number','framework'),
-					"desc" => __('This is the number of related portfolio items you wish to show.','framework'),
-					"id" => $shortname."_related_portfolio_number",
-					"std" => "3",
-					"type" => "text");
-					
-$options[] = array( "name" => __('Show Featured Image','framework'),
-					"desc" => __('Check this to show the featured image at the beginning of each blog post.','framework'),
-					"id" => $shortname."_post_img",
-					"std" => "false",
-					"type" => "checkbox");
-					
-$options[] = array( "name" => __('Comment Description','framework'),
-					"desc" => __('This is a short description that is displayed near the comments.','framework'),
-					"id" => $shortname."_comment_description",
-					"std" => "Got something to say? Feel free, I want to hear from you!",
-					"type" => "textarea");
-					
-$options[] = array( "name" => __('Respond Description','framework'),
-					"desc" => __('This is a short description that is displayed near the comment form.','framework'),
-					"id" => $shortname."_respond_description",
-					"std" => "Let us know your thoughts on this post but remember to place nicely folks!",
-					"type" => "textarea");
-
-
-update_option('xbones_template',$options); 					  
-update_option('xbones_themename',$themename);   
-update_option('xbones_shortname',$shortname);
-
-}
+					"options" => $of_categories);
+	*/				
+	}
 }
 ?>

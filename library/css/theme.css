@@ -1,0 +1,743 @@
+/*	--------------------------------------------------
+	Buttons
+	-------------------------------------------------- */
+.button, #searchsubmit {
+  background: black;
+  display: inline-block;
+  text-align: center;
+  padding: 9px 34px 11px;
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+  line-height: 1;
+  font-family: "Helvetica Neue", "Helvetica", Arial, Verdana, sans-serif;
+  position: relative;
+  cursor: pointer;
+  border: none;
+  margin-left: 0;
+  font-size: 1.125em;
+  /* Addition to Foundation */
+
+}
+/* Don't use native buttons on iOS */
+input[type=submit].button {
+  -webkit-appearance: none;
+}
+.button.radius, #searchsubmit {
+  -moz-border-radius: 3px;
+  -webkit-border-radius: 3px;
+  border-radius: 3px;
+}
+.button.round {
+  -moz-border-radius: 1000px;
+  -webkit-border-radius: 1000px;
+  border-radius: 1000px;
+}
+.button.full-width {
+  width: 100%;
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+  text-align: center;
+}
+.button.left-align {
+  text-align: left;
+  text-indent: 12px;
+}
+/* Sizes ---------- */
+.small.button, #searchsubmit {
+  font-size: 16px;
+  padding: 8px 20px 10px;
+  width: auto;
+}
+.medium.button {
+  font-size: 16px;
+  width: auto;
+}
+.large.button {
+  font-size: 18px;
+  padding: 11px 48px 13px;
+  width: auto;
+}
+/* Hovers ---------- */
+.button:hover, .button:focus {
+  background-color: aqua;
+}
+/* Disabled ---------- */
+.button.disabled, .button[disabled] {
+  opacity: 0.6;
+  cursor: default;
+}
+/* Buttons */
+@media only screen and (max-width: 767px) {
+  .button {
+    display: block;
+  }
+  button.button {
+    width: 100%;
+    padding-left: 0;
+    padding-right: 0;
+  }
+}
+/* -----------------------------------------
+   Standard s
+----------------------------------------- */
+form {
+  margin: 0 0 18px;
+}
+label {
+  display: block;
+  font-size: 13px;
+  line-height: 18px;
+  cursor: pointer;
+  margin-bottom: 18px;
+  color: #333333;
+}
+input, textarea {
+  border-right: 1px solid black;
+  border-bottom: 1px solid black;
+}
+input, textarea, select {
+  display: block;
+  margin-bottom: 9px;
+}
+label + input,
+label + textarea,
+label + select,
+label + div.dropdown,
+select + div.dropdown {
+  margin-top: -9px;
+}
+/* Text input and textarea font and padding */
+input, textarea {
+  font-size: 13px;
+  padding: 4px 3px 2px;
+  background: white;
+}
+input:focus, textarea:focus {
+  outline: none !important;
+}
+input.oversize, textarea.oversize {
+  font-size: 18px !important;
+  padding: 4px 5px !important;
+}
+input:focus, textarea:focus {
+  background: aqua;
+}
+/* Inlined Label Style */
+input.placeholder, textarea.placeholder {
+  color: #333333;
+}
+/* Text input and textarea sizes */
+input, textarea {
+  width: 100%;
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+}
+/* Addon */
+input.small, textarea.small {
+  width: 134px;
+}
+input.medium, textarea.medium {
+  width: 254px;
+}
+input.large, textarea.large {
+  width: 434px;
+}
+/* Fieldsets */
+fieldset {
+  padding: 9px 9px 2px 9px;
+  border: solid 1px black;
+  margin: 18px 0;
+}
+/* Inlined Radio & Checkbox */
+.form-field input[type=radio], div.form-field input[type=checkbox] {
+  display: inline;
+  width: auto;
+  margin-bottom: 0;
+}
+/* Errors */
+.form-field.error input, input.input-text.red {
+  border-color: #C00000;
+  background-color: rgba(255, 0, 0, 0.15);
+}
+.form-field.error label, label.red {
+  color: #C00000;
+}
+.form-field.error small, small.error {
+  margin-top: -6px;
+  display: block;
+  margin-bottom: 9px;
+  font-size: 11px;
+  color: #C00000;
+  width: 260px;
+}
+.small + small.error {
+  width: 140px;
+}
+.medium + small.error {
+  width: 260px;
+}
+.large + small.error {
+  width: 440px;
+}
+/* -----------------------------------------
+	   Nicer s
+	----------------------------------------- */
+div.form-field input, input, textarea {
+  border: solid 1px black;
+  border-radius: 2px;
+  -webkit-border-radius: 2px;
+  -moz-border-radius: 2px;
+}
+div.form-field input, input, textarea {
+  font-size: 13px;
+  padding: 6px 3px 4px;
+  outline: none !important;
+  background: url(../images/misc/input-bg.png) transparent;
+}
+div.form-field input:focus, input:focus, textarea:focus {
+  background: url(../images/misc/input-bg.png) white;
+  color: black;
+}
+fieldset {
+  border-radius: 3px;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+}
+div.form-field input[type=radio], div.form-field input[type=checkbox] {
+  display: inline;
+  width: auto;
+  margin-bottom: 0;
+}
+div.form-field.error small, small.error {
+  padding: 6px 4px;
+  border: solid 0 #C00000;
+  border-width: 0 1px 1px 1px;
+  margin-top: -10px;
+  background: #C00000;
+  color: #fff;
+  font-size: 12px;
+  font-weight: bold;
+  border-bottom-left-radius: 2px;
+  border-bottom-right-radius: 2px;
+  -webkit-border-bottom-left-radius: 2px;
+  -webkit-border-bottom-right-radius: 2px;
+  -moz-border-radius-bottomleft: 2px;
+  -moz-border-radius-bottomright: 2px;
+}
+div.form-field.error .small + small, .small + small.error {
+  width: 132px;
+}
+div.form-field.error .medium + small, .medium + small.error {
+  width: 252px;
+}
+div.form-field.error .large + small, .large + small.error {
+  width: 432px;
+}
+/* -------------------------------------------------- 
+	:: forms
+---------------------------------------------------*/
+@media only screen and (max-width: 767px) {
+  div.form-field input,
+  div.form-field input.small,
+  div.form-field input.medium,
+  div.form-field input.large,
+  div.form-field input.oversize,
+  input.input-text,
+  input.input-text.oversize,
+  textarea,
+  div.form-field input,
+  div.form-field input.oversize,
+  input.input-text,
+  input.input-text.oversize,
+  textarea {
+    display: block;
+    width: 100%;
+    padding: 6px 2% 4px;
+    font-size: 18px;
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+  }
+  div.form-field input,
+  div.form-field input.oversize,
+  input.input-text,
+  input.input-text.oversize,
+  textarea {
+    -webkit-border-radius: 2px;
+    -moz-border-radius: 2px;
+    border-radius: 2px;
+  }
+  div.form-field.error small, small.error {
+    padding: 6px 2%;
+    display: block;
+  }
+  div.form-field.error .small + small, .small + .error {
+    width: auto;
+  }
+  div.form-field.error .medium + small, .medium + .error {
+    width: auto;
+  }
+  div.form-field.error .large + small, .large + .error {
+    width: auto;
+  }
+}
+/*	--------------------------------------------------
+   	Nav Bar with Dropdowns
+	-------------------------------------------------- */
+.nav-bar {
+  height: auto;
+  float: right;
+  margin-top: 50px;
+  margin-bottom: 0px;
+}
+.nav-bar > li {
+  float: left;
+  display: block;
+  position: relative;
+  padding: 0;
+  margin: 0;
+  line-height: 45px;
+}
+.nav-bar > li > a {
+  position: relative;
+  padding: 0 0 0 0;
+  display: block;
+  text-decoration: none;
+  font-size: 12px;
+  font-size: 1.2rem;
+}
+.nav-bar > li > input {
+  margin: 0 16px;
+}
+.nav-bar > li ul {
+  margin-bottom: 0;
+}
+.nav-bar > li li {
+  line-height: 1.3;
+}
+.nav-bar > li.has-flyout > a {
+  padding-left: 36px;
+}
+.nav-bar > li:hover > a {
+  color: #141414;
+  z-index: 2;
+}
+.nav-bar > li:hover > a:after {
+  border-top-color: #141414;
+}
+.flyout {
+  background: #fff;
+  margin: 0;
+  padding: 20px;
+  border: 1px solid #ddd;
+  position: absolute;
+  top: 45px;
+  left: -1px;
+  width: 150px;
+  z-index: 10;
+}
+.flyout.small {
+  width: 200px;
+}
+.flyout.large {
+  width: 600px;
+}
+.flyout.right {
+  left: auto;
+  right: 0;
+}
+.flyout p:last-child {
+  margin-bottom: 0;
+}
+.nav-bar > li .flyout {
+  display: none;
+}
+.nav-bar > li:hover .flyout {
+  display: block;
+}
+/* Nav Bar */
+@media only screen and (max-width: 767px) {
+  .nav-bar {
+    height: auto;
+    float: left;
+    width: 100%;
+  }
+  .nav-bar > li {
+    float: none;
+    display: block;
+    border-right: none;
+  }
+  .nav-bar > li > a {
+    text-align: center;
+    border-top: 1px solid #ddd;
+    border-right: none;
+  }
+  .nav-bar > li:first-child > a {
+    border-top: none;
+  }
+  .nav-bar > li:hover > a {
+    font-weight: bold;
+  }
+  .nav-bar > li:hover ul {
+    position: relative;
+  }
+  .nav-bar > li.has-flyout > a {
+    padding-left: 0px;
+  }
+  .flyout {
+    position: relative;
+    width: auto;
+    top: auto;
+    margin-right: -2px;
+    border-width: 1px 1px 0px 1px;
+  }
+  .flyout.right {
+    float: none;
+    right: auto;
+    left: -1px;
+  }
+  .flyout p:last-child {
+    margin-bottom: 18px;
+  }
+}
+/* Nav Bar */
+@media only screen and (max-device-width: 800px), only screen and (device-width: 1024px) and (device-height: 600px), only screen and (width: 1280px) and (orientation: landscape), only screen and (device-width: 800px), only screen and (max-width: 767px) {
+  .video {
+    padding-top: 0;
+  }
+}
+/************************
+*************************
+*************************
+*************************
+*************************
+*************************
+*************************
+************************/
+.bordertop {
+  border-top: 1px solid black;
+  margin-top: 0px;
+  padding-top: 20px;
+}
+.borderbottom {
+  padding-bottom: 2px;
+  padding-top: 20px;
+  margin-bottom: 20px;
+}
+body {
+  background-color: white;
+  color: black;
+}
+header {
+  margin-top: 20px;
+  position: relative;
+}
+header h1 {
+  margin: 0px;
+  padding: 0px;
+  text-align: center;
+}
+.textcenter {
+  text-align: center;
+}
+.testimonials {
+  padding: 10px 0px 10px 0px;
+}
+.testimonials h3 {
+  line-height: 1.5em;
+  text-align: center;
+}
+.corners {
+  -webkit-border-radius: 1%;
+}
+.container {
+  margin-top: 0px;
+  background-color: transparent;
+  border-top: 40px solid transparent;
+  /*	border-right: 40px solid white;
+	border-bottom: 20px solid white;
+	border-left: 40px solid white;*/
+
+}
+#portfolio {
+  margin-bottom: 0px;
+  height: 100%;
+}
+#portfolio img {
+  margin-bottom: 15px;
+}
+#slider {
+  margin-bottom: 0px;
+  padding: 20px 0;
+}
+footer {
+  padding-bottom: 20px;
+}
+.widget-title {
+  border-bottom: 1px solid #333;
+  padding-bottom: 7px;
+}
+/* #Media Queries
+================================================== */
+/* Smaller than standard 960 (devices and browsers) */
+@media only screen and (max-width: 959px) {
+  
+}
+/* Tablet Portrait size to standard 960 (devices and browsers) */
+@media only screen and (min-width: 768px) and (max-width: 959px) {
+  
+}
+/* All Mobile Sizes (devices and browser) */
+@media only screen and (max-width: 767px) {
+  
+}
+/* Mobile Landscape Size to Tablet Portrait (devices and browsers) */
+@media only screen and (min-width: 480px) and (max-width: 767px) {
+  
+}
+/* Mobile Portrait Size to Mobile Landscape Size (devices and browsers) */
+@media only screen and (max-width: 479px) {
+  
+}
+@font-face {
+  font-family: 'IconicStrokeRegular';
+  src: url('fonts/iconic_stroke-webfont.eot');
+  src: url('fonts/iconic_stroke-webfont.eot?#iefix') format('embedded-opentype'), url('fonts/iconic_stroke-webfont.woff') format('woff'), url('fonts/iconic_stroke-webfont.ttf') format('truetype'), url('fonts/iconic_stroke-webfont.svg#IconicStrokeRegular') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+.glyphs {
+  font-family: 'IconicStrokeRegular';
+  font-size: 32px;
+  float: left;
+  height: 1px;
+  line-height: 1px;
+  color: red;
+}
+.calltoaction {
+  float: left;
+  padding: 2px 0 20px 7px;
+}
+.fancylink {
+  color: orange;
+}
+.arrows {
+  font-size: 30px;
+  color: #ff7700;
+}
+::-webkit-scrollbar-track-piece {
+  background-color: #fff;
+  -webkit-border-radius: 0;
+}
+::-webkit-scrollbar {
+  width: 20px;
+  height: 8px;
+}
+::-webkit-scrollbar-thumb {
+  height: 20px;
+  background-color: #000;
+}
+::-webkit-scrollbar-thumb:hover {
+  height: 50px;
+  background-color: #333;
+  /*************************************************/
+
+}
+nav select {
+  background: white;
+  color: black;
+  width: 100%;
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid black;
+  height: 40px;
+  margin-bottom: 40px;
+}
+#navigation {
+  margin-top: 20px;
+}
+/* Main menu settings */
+#centeredmenu {
+  clear: both;
+  float: left;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  z-index: 1000;
+  /* This makes the dropdown menus appear above the page content below */
+
+  position: relative;
+  bottom: 0px;
+}
+/* Top menu items */
+#centeredmenu ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  float: right;
+  position: relative;
+  right: 50%;
+}
+#centeredmenu ul li {
+  margin: 0 20px;
+  padding: 0;
+  float: left;
+  position: relative;
+  left: 50%;
+  top: 0px;
+}
+#centeredmenu ul li a {
+  display: block;
+  margin: 0;
+  padding: 1.2em 1.2em 1em 1.2em;
+  line-height: 1em;
+  text-decoration: none;
+  color: black;
+  font-weight: bold;
+  transition: all 2s linear;
+  -webkit-transition: all 0.2s ease-out;
+}
+#centeredmenu ul li.active a {
+  color: white;
+  background: black;
+}
+#centeredmenu ul li a:hover {
+  background: #36f;
+  /* Top menu items background colour */
+
+  color: #fff;
+}
+#centeredmenu ul li:hover a, #centeredmenu ul li.hover a {
+  /* This line is required for IE 6 and below */
+
+  background: black;
+  /* Top menu items background colour */
+
+  color: white;
+}
+/* Submenu items */
+#centeredmenu ul ul {
+  display: none;
+  /* Sub menus are hiden by default */
+
+  position: absolute;
+  top: 39px;
+  left: 0;
+  right: auto;
+  /*resets the right:50% on the parent ul */
+
+  width: auto;
+  /* width of the drop-down menus */
+  min-width: 180px;
+  border: 1px solid black;
+  z-index: 1000;
+}
+#centeredmenu ul ul li {
+  left: auto;
+  /*resets the left:50% on the parent li */
+
+  margin: 0;
+  /* Reset the 1px margin from the top menu */
+
+  clear: left;
+  width: 100%;
+  border-bottom: 1px solid black;
+  /* sub menu item horizontal lines */
+
+}
+#centeredmenu ul ul li:last-child {
+  border-bottom: none;
+  /* sub menu item horizontal lines */
+
+}
+#centeredmenu ul ul li a,
+#centeredmenu ul li.active li a,
+#centeredmenu ul li:hover ul li a,
+#centeredmenu ul li.hover ul li a {
+  /* This line is required for IE 6 and below */
+
+  font-weight: normal;
+  /* resets the bold set for the top level menu items */
+
+  background: white;
+  color: black;
+  line-height: 1em;
+  /* overwrite line-height value from top menu */
+
+}
+#centeredmenu ul ul li a:hover,
+#centeredmenu ul li.active ul li a:hover,
+#centeredmenu ul li:hover ul li a:hover,
+#centeredmenu ul li.hover ul li a:hover {
+  /* This line is required for IE 6 and below */
+
+  background: black;
+  /* Sub menu items background colour */
+
+  color: white;
+}
+/* Flip the last submenu so it stays within the page */
+#centeredmenu ul ul.last {
+  left: auto;
+  /* reset left:0; value */
+
+  right: 0;
+  /* Set right value instead */
+
+}
+/* Make the sub menus appear on hover */
+#centeredmenu ul li:hover ul, #centeredmenu ul li.hover ul {
+  /* This line is required for IE 6 and below */
+
+  display: block;
+  /* Show the sub menus */
+
+}
+@media only screen and (max-width: 767px) {
+  #centeredmenu {
+    margin-bottom: 20px;
+  }
+  /* Top menu items */
+  #centeredmenu ul {
+    clear: both;
+    left: 0px;
+    width: 100%;
+    text-align: center;
+  }
+  #centeredmenu ul li {
+    margin: 0;
+    padding: 0;
+    float: left;
+    position: relative;
+    left: 0%;
+    top: 0px;
+    display: block;
+    width: 100%;
+  }
+  #centeredmenu ul li a {
+    display: block;
+    margin: 0;
+    padding: 1em 1em;
+    line-height: 1em;
+    text-decoration: none;
+    color: black;
+    font-weight: bold;
+  }
+  /* Submenu items */
+  #centeredmenu ul ul {
+    top: 36px;
+    width: 99.4%;
+    /* width of the drop-down menus */
+  }
+  /* Make the sub menus appear on hover */
+  #centeredmenu ul li:hover ul, #centeredmenu ul li.hover ul {
+    /* This line is required for IE 6 and below */
+  
+    display: none;
+    /* Show the sub menus */
+  
+    visibility: hidden;
+  }
+}

@@ -1,0 +1,110 @@
+body {
+	background-color: #ffffff;
+	}
+
+h1, h2, h3, h4, h5, h6, a {
+	color: #15857f;
+	font-family: Hammersmith One}
+
+p, li {
+	color: #5c5c5c;
+	font-family: Hammersmith One}
+
+.bordertop {
+	border-top: 4px solid #15857f;
+}
+
+.button, #searchsubmit { 
+	background-color: #15857f; 
+	color: #ffffff;
+}
+
+.button:hover, .button:focus, #searchsubmit:hover, #searchsubmit:focus { 
+	background-color: #50a49f;
+}
+
+form div.form-field input, form input, form textarea { 
+	border:  1px solid #15857f;  
+}
+
+form div.form-field input, form input.input-text, form textarea { 
+	outline: none !important; 
+	background: transparent; 
+	colour: #5c5c5c}
+
+.widget-title {
+  border-bottom: 1px solid #d9d9d9;
+}
+
+.flex-control-nav li a { border: 4px solid #15857f; }
+.flex-control-nav li a:hover { border: 7px solid #15857f; }
+.flex-control-nav li a.active { background-color: #15857f; }
+
+.captions h3 {
+	background: #15857f;
+	color: #ffffff;
+}
+
+.fancylink {
+	color: #15857f;
+}
+
+nav select {
+  background: #ffffff;
+  color: #15857f;
+  border: 1px solid #15857f;
+}
+
+#centeredmenu ul li a {
+   color:#15857f;
+}
+
+#centeredmenu ul li.active a {
+   color:#ffffff;
+   background:#15857f;
+}
+
+#centeredmenu ul li a:hover {
+   background:#15857f/* Top menu items background colour */
+   color:#ffffff;
+}
+#centeredmenu ul li:hover a,
+#centeredmenu ul li.hover a { /* This line is required for IE 6 and below */
+   background:#15857f; /* Top menu items background colour */
+   color:#ffffff;
+}
+
+/* Submenu items */
+#centeredmenu ul ul {
+   border: 1px solid #15857f;
+}
+#centeredmenu ul ul li {
+   border-bottom:1px solid #15857f; /* sub menu item horizontal lines */
+}
+
+#centeredmenu ul ul li a,
+#centeredmenu ul li.active li a,
+#centeredmenu ul li:hover ul li a,
+#centeredmenu ul li.hover ul li a { /* This line is required for IE 6 and below */
+   background: #ffffff;
+   color:#15857f;
+}
+
+#centeredmenu ul ul li a:hover,
+#centeredmenu ul li.active ul li a:hover,
+#centeredmenu ul li:hover ul li a:hover,
+#centeredmenu ul li.hover ul li a:hover { /* This line is required for IE 6 and below */
+   background:#15857f; /* Sub menu items background colour */
+   color:#ffffff;
+}
+
+::-webkit-scrollbar-track-piece{ 
+	background-color:#ffffff;
+	background-attachment:fixed;
+	}
+::-webkit-scrollbar-thumb{ background-color:#15857f; }
+::-webkit-scrollbar-thumb:hover{ background-color:#50a49f; }
+::selection { background: #15857f; color: #ffffff; }
+::-moz-selection { background: #15857f; color: #ffffff; }
+
+

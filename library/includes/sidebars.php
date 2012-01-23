@@ -39,3 +39,77 @@ function xbones_register_sidebars() {
     
     */
 } // don't remove this bracket!
+
+
+if ( function_exists('register_sidebar') ) {
+    register_sidebar(array(
+        'name' => 'Main Sidebar',
+        'before_widget' => '',
+        'after_widget' => '',
+        'before_title' => '<h4 class="widget-title">',
+        'after_title' => '</h4>',
+    ));
+    register_sidebar(array(
+        'name' => 'Page Sidebar',
+        'before_widget' => '',
+        'after_widget' => '',
+        'before_title' => '<h4 class="widget-title">',
+        'after_title' => '</h4>',
+    ));
+    register_sidebar(array(
+        'name' => 'Footer One',
+        'before_widget' => '',
+        'after_widget' => '',
+        'before_title' => '<h4 class="">',
+        'after_title' => '</h4>',
+    ));
+    register_sidebar(array(
+        'name' => 'Footer Two',
+        'before_widget' => '',
+        'after_widget' => '',
+        'before_title' => '<h4 class="widget-title">',
+        'after_title' => '</h4>',
+    ));
+    register_sidebar(array(
+        'name' => 'Footer Three',
+        'before_widget' => '',
+        'after_widget' => '',
+        'before_title' => '<h4 class="widget-title">',
+        'after_title' => '</h4>',
+    ));
+    register_sidebar(array(
+        'name' => 'Footer Four',
+        'before_widget' => '',
+        'after_widget' => '',
+        'before_title' => '<h4 class="widget-title">',
+        'after_title' => '</h4>',
+    ));
+    register_sidebar(array(
+        'name' => 'Home Module One',
+        'before_widget' => '',
+        'after_widget' => '',
+        'before_title' => '<h4 class="widget-title">',
+        'after_title' => '</h4>',
+    ));
+    register_sidebar(array(
+        'name' => 'Home Module Two',
+        'before_widget' => '',
+        'after_widget' => '',
+        'before_title' => '<h4 class="widget-title">',
+        'after_title' => '</h4>',
+    ));
+    register_sidebar(array(
+        'name' => 'Home Module Three',
+        'before_widget' => '',
+        'after_widget' => '',
+        'before_title' => '<h4 class="widget-title">',
+        'after_title' => '</h4>',
+    ));
+    register_sidebar(array(
+        'name' => 'Home Module Four',
+        'before_widget' => '',
+        'after_widget' => '',
+        'before_title' => '<h4 class="widget-title">',
+        'after_title' => '</h4>',
+    ));
+}
